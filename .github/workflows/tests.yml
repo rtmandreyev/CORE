@@ -1,0 +1,69 @@
+name: tests
+
+# Clean macOS runners, no applications installed. tests/__init__.py enforces the
+# safety boundary (test mode, throwaway HOME, tripwire PATH stubs, real-file
+# fingerprint), and the smoke job runs CORE in test mode against a fresh HOME.
+# Nothing here can change application state.
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: python ${{ matrix.python-version }}
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.x"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Byte-compile
+        run: python3 -m py_compile corelib/*.py corelib/surfaces/*.py tests/*.py
+
+      - name: Test suite
+        run: python3 -m unittest discover -s tests -t . -v
+
+      - name: Smoke test in a fresh home with no applications
+        run: |
+          set -euo pipefail
+          export CORE_TEST_MODE=1
+          export HOME="$RUNNER_TEMP/home" CORE_ROOT="$RUNNER_TEMP/root" CORE_BUILD_DIR="$RUNNER_TEMP/build"
+          mkdir -p "$HOME" "$CORE_ROOT"
+          # Every external call gets a recorded, inert answer: nothing is installed.
+          echo '{"responses": [], "log": "'"$RUNNER_TEMP"'/effects.log"}' > "$RUNNER_TEMP/effects.json"
+          export CORE_TEST_EFFECTS="$RUNNER_TEMP/effects.json"
+          cp -R themes "$CORE_ROOT/"
+
+          for theme in optical shell ember glacier augment neon; do
+            bin/core build "$theme" > /dev/null
+          done
+
+          bin/core theme new ci-theme --from shell
+          bin/core build ci-theme > /dev/null
+          test "$(ls "$CORE_ROOT/themes/ci-theme")" = "theme.toml"
+
+          bin/core apply optical --dry-run | tee "$RUNNER_TEMP/plan.txt"
+          grep -q "Nothing to change on this machine" "$RUNNER_TEMP/plan.txt"
+          bin/core doctor > /dev/null
+          bin/core export optical chatgpt | grep -q '^codex-theme-v1:'
+          bin/core --version
+
+          env -u CORE_TEST_EFFECTS python3 -c "
+          from corelib import effects
+          try:
+              effects.current().run(['osascript', '-e', 'beep'])
+          except effects.EffectBlocked:
+              print('external effects are blocked in test mode')
+          else:
+              raise SystemExit('external effects were NOT blocked')
+          "

@@ -1,0 +1,351 @@
+[theme]
+id = "shell"
+name = "NODE // SHELL"
+mode = "light"
+slug = "node-shell"
+brand = "NODE"
+author = "Artyom Andreyev"
+description = "Daytime ceramic synthetic chassis: light cool-gray material, translucent green signal and backlighting, graphite information, yellow keycap command controls, restrained red faults."
+
+# ─────────────────────────────────────────────
+# PALETTE — what colors exist.
+# Cold emitted light through translucent green polymer: nearly black, subtly
+# cold green, nighttime only. Never army / olive / neon / cream.
+# ─────────────────────────────────────────────
+[palette]
+# The material axis. `black*` is the CHASSIS (very dark in a dark theme, light
+# ceramic here) and `white*` is INFORMATION on that chassis; the role names below
+# keep working across both because they reference this axis, never a hue.
+# Non-negotiable: ceramic gray, never olive / military / beige / Matrix.
+
+# Light synthetic ceramic chassis.
+black = "#E3E7E3"
+black_alt = "#D4DAD5"
+
+# Translucent backlit-green raised material.
+black_raised = "#B6D8C2"
+
+black_line = "#A2ADA5"
+
+# Graphite information drawn on that material.
+white = "#18201C"
+white_bright = "#050A07"
+
+# Structural gray.
+gray = "#68736C"
+gray_bright = "#3F4A43"
+
+# Green machinery: `green` is dark enough to read as ink on ceramic,
+# `green_bright` is the emitted/focus green, `green_dim` is the backlit panel.
+green = "#0C7540"
+green_bright = "#13DA79"
+green_dim = "#B6D8C2"
+
+# Yellow keycap family: `yellow` reads as standalone ink, `yellow_bright` is the
+# physical key material, `yellow_dim` is a filled yellow control.
+yellow = "#6F6808"
+yellow_bright = "#DDD12F"
+yellow_dim = "#E8DF72"
+
+# Fault only.
+red = "#CE514B"
+red_bright = "#E45E57"
+
+# Green interaction/selection material.
+selection = "#A5E0BC"
+
+# ─────────────────────────────────────────────
+# ROLES — what those colors mean in this theme.
+# ─────────────────────────────────────────────
+[roles]
+background = "black"
+surface = "black_alt"
+surface_raised = "black_raised"
+border = "black_line"
+border_emphasis = "green_dim"
+
+text = "white"
+text_emphasis = "white_bright"
+text_muted = "gray_bright"
+
+structure = "gray"
+structure_emphasis = "gray_bright"
+
+signal = "green"
+signal_emphasis = "green_bright"
+signal_dim = "green_dim"
+
+command = "yellow"
+command_emphasis = "yellow_bright"
+
+# Filled controls. A physical yellow keycap is a MATERIAL with a dark legend
+# printed on it, so a filled control never pairs its fill with light text:
+# `command_material` is the fill, `command_legend` is what is drawn on it.
+command_material = "yellow_bright"
+command_legend = "text_emphasis"
+
+fault = "red"
+fault_emphasis = "red_bright"
+
+selection = "selection"
+
+[terminal]
+foreground = "text"
+background = "background"
+cursor = "signal_emphasis"
+selection_background = "selection"
+selection_foreground = "text_emphasis"
+
+[terminal.ansi]
+black = "text_emphasis"
+red = "fault"
+green = "signal"
+yellow = "command"
+blue = "structure_emphasis"
+magenta = "gray_bright"
+cyan = "signal"
+white = "structure"
+
+bright_black = "gray"
+bright_red = "fault_emphasis"
+bright_green = "signal_emphasis"
+bright_yellow = "command_emphasis"
+bright_blue = "text_muted"
+bright_magenta = "structure_emphasis"
+bright_cyan = "signal_emphasis"
+bright_white = "text_emphasis"
+
+# ─────────────────────────────────────────────
+# PROMPT — approved Starship semantics.
+# NODE white / // gray / directory green / branch white /
+# status yellow / arrow green / errors red.
+# ─────────────────────────────────────────────
+[prompt]
+frame = "structure"
+brand = "text_emphasis"
+separator = "structure"
+directory = "signal_emphasis"
+git_branch = "text_emphasis"
+git_status = "command_emphasis"
+runtime = "command_emphasis"
+environment = "signal_emphasis"
+success = "signal_emphasis"
+error = "fault_emphasis"
+vim_command = "command_emphasis"
+
+# ─────────────────────────────────────────────
+# APP MAPPINGS — application-specific assignments.
+# Application-specific KEYS live here, application-specific STRUCTURE lives in
+# the templates. A future theme changes these values without touching Python.
+# ─────────────────────────────────────────────
+
+[apps.fastfetch]
+title = "text_emphasis"
+separator = "structure"
+label = "structure_emphasis"
+value = "text"
+healthy = "signal_emphasis"
+status = "command_emphasis"
+fault = "fault_emphasis"
+# Yellow frequency: a small command/state control line and a state badge, not a
+# yellow panel. Fastfetch keeps white values, gray structure and green health.
+rule = "command"
+badge = "command_emphasis"
+
+[apps.vscode]
+# Structure
+canvas = "background"
+surface = "surface"
+surface_raised = "surface_raised"
+border = "border"
+border_emphasis = "border_emphasis"
+# Information
+body = "text"
+strong = "text_emphasis"
+metadata = "structure"
+metadata_emphasis = "structure_emphasis"
+comment = "structure"
+# Interaction
+cursor = "signal_emphasis"
+focus = "signal"
+accent = "signal"
+accent_strong = "signal_emphasis"
+selection = "selection"
+selection_foreground = "text_emphasis"
+selection_highlight = "signal_dim"
+# State
+modified = "command"
+warning = "command_emphasis"
+error = "fault"
+error_strong = "fault_emphasis"
+success = "signal"
+# Yellow frequency: small badges and warning indicators carry the command colour
+# where it means state, so ordinary editing surfaces stay dark and green.
+badge = "command_material"
+badge_text = "command_legend"
+# Syntax
+keyword = "signal"
+function = "text_emphasis"
+string = "command"
+number = "command_emphasis"
+constant = "command_emphasis"
+type = "signal_emphasis"
+variable = "text"
+parameter = "text"
+operator = "text_muted"
+tag = "signal"
+attribute = "command"
+invalid = "fault_emphasis"
+
+# The CLI skin and the Desktop theme are the SAME artifact: the desktop
+# converts the active backend skin into a DesktopTheme
+# (apps/desktop/src/themes/skin.ts). Keys below marked (desktop) are read by
+# that converter; the rest are the CLI contract.
+[apps.hermes]
+background = "background"        # (desktop) GUI canvas opt-in
+status_bar_bg = "surface"     # (desktop) backdrop fallback
+ui_text = "text"                 # (desktop) foreground seed
+banner_text = "text_emphasis"    # (desktop) foreground seed
+ui_accent = "signal_emphasis"    # (desktop) accent / midground / focus / selection accent
+banner_accent = "signal"
+ui_border = "border"             # (desktop) hairlines
+banner_border = "border"
+banner_title = "text_emphasis"
+banner_dim = "text_muted"    # (desktop) muted foreground / CLI dim
+ui_label = "structure_emphasis"
+ui_ok = "signal"
+ui_error = "fault"      # (desktop) destructive
+ui_warn = "command"
+session_border = "signal"  # (desktop) muted foreground
+session_label = "command"
+
+prompt = "text_emphasis"
+input_rule = "signal"
+response_border = "signal"
+
+status_bar_text = "text"
+status_bar_strong = "text_emphasis"
+status_bar_dim = "text_muted"
+status_bar_good = "signal"
+status_bar_warn = "command"
+status_bar_bad = "fault"
+status_bar_critical = "fault_emphasis"
+
+completion_menu_bg = "surface"           # (desktop) input fill
+completion_menu_current_bg = "signal_dim"
+completion_menu_meta_bg = "surface"
+completion_menu_meta_current_bg = "signal_dim"
+selection_bg = "selection"
+
+shell_dollar = "command"
+voice_status_bg = "surface"
+
+# Yellow frequency: small persistent CLI markers (the prompt sigil and session
+# labels) carry the command colour; message text, canvas and focus stay as they
+# are, and focus/active semantics remain green.
+
+[apps.obsidian]
+# Structure
+canvas = "background"
+surface = "surface"
+surface_2 = "surface"
+surface_3 = "surface_raised"
+border = "border"
+border_bright = "signal"
+# Information
+body = "text"
+strong = "text_emphasis"
+muted = "text_muted"
+dim = "structure"
+# Interaction
+accent = "signal"
+accent_bright = "signal_emphasis"
+accent_dim = "signal_dim"
+hover = "surface_raised"
+active = "selection"
+selection = "selection"
+selection_foreground = "text_emphasis"
+# Semantic state
+success = "signal"
+success_bright = "signal_emphasis"
+warning = "command"
+warning_bright = "command_emphasis"
+error = "fault"
+error_bright = "fault_emphasis"
+highlight = "text_emphasis"
+highlight_bg = "yellow_dim"
+# Code
+code_bg = "signal_dim"
+code_text = "text_emphasis"
+code_keyword = "signal"
+code_string = "command"
+code_number = "command"
+code_function = "text_emphasis"
+code_comment = "structure_emphasis"
+# Headings: a white/green hierarchy, not a rainbow.
+heading_1 = "text_emphasis"
+heading_2 = "text"
+heading_3 = "signal"
+heading_4 = "text_emphasis"
+heading_5 = "structure_emphasis"
+heading_6 = "structure"
+# Tags / navigation
+# Yellow frequency: wiki tags and task checkboxes are the small persistent
+# controls users actually look at, so they carry the command colour at tag-chip
+# size. Body text, navigation and canvas stay dark/green.
+tag_bg = "yellow_dim"
+tag_text = "text_emphasis"
+link = "signal"
+link_bright = "signal_emphasis"
+scrollbar = "surface_raised"
+checkbox = "command_emphasis"
+# Small yellow metadata markers rather than yellow metadata text.
+heading_ornament = "command"
+metadata_icon = "command"
+metadata_add = "command"
+
+# ─────────────────────────────────────────────
+# OBSIDIAN — code tokens and application chrome.
+#
+# Obsidian's own stylesheet (verified against Obsidian 1.13.7 app.css) colours
+# every fenced-code token from a `--code-*` variable and nothing else:
+#   .cm-keyword  -> var(--code-keyword)     .cm-string   -> var(--code-string)
+#   .cm-number   -> var(--code-value)       .cm-builtin,
+#   .cm-comment  -> var(--code-comment)     .cm-property,
+#   .cm-punctuation, .cm-bracket,           .cm-attribute,
+#   .cm-hr       -> var(--code-punctuation) .cm-type     -> var(--code-function)
+#   .token.keyword / .token.string / .token.number … for the reading view.
+# Every token that is drawn inside the pale translucent green code panel is
+# therefore dark: graphite code, readable dark green ink keywords, readable
+# dark gold literals, structural grey comments, red faults. The emitted green
+# and the bright physical yellow are never used as code text.
+code_property = "text_emphasis"
+code_punctuation = "text"
+code_operator = "text_muted"
+code_tag = "signal"
+code_important = "command"
+code_invalid = "fault"
+code_border = "border"
+code_bracket_bg = "selection"
+
+# Obsidian application chrome. `chrome` is the chassis the shell is built from
+# (titlebar, tab strip, ribbon, status bar, sidebar chrome); `chrome_alt` is the
+# lighter active/content surface (active tab, panes, modals, palettes, fields);
+# `chrome_active` is a selected structural surface, which is the pale backlit
+# green. Icons are structural grey at rest and readable green ink when active.
+chrome = "surface"
+chrome_alt = "background"
+chrome_active = "selection"
+icon = "text_muted"
+icon_hover = "signal"
+icon_active = "signal"
+
+# Filled/selected controls: the pale backlit green fill with a graphite
+# legend. This pair is the contrast contract — `control_fill` is never paired
+# with light text, because the fill is light material.
+control_fill = "selection"
+control_legend = "text_emphasis"
+
+[apps.ghostty]
+# Bold text uses the bright ANSI palette.
+bold_color = "bright"

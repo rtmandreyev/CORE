@@ -1,0 +1,88 @@
+# Defaults for the [apps.*] keys a theme does not set.
+#
+# A theme only states where it differs. Values are palette names, role names,
+# literals, or (inside one app table) the name of another key of that table:
+# `caret = "accent_bright"` means "whatever [apps.obsidian] accent_bright is".
+#
+# [light.*] / [dark.*] tables apply on top of the common defaults for themes of
+# that mode.
+
+[apps.ghostty]
+cursor_text = "background"
+# Set to "bright" to render bold text with the bright ANSI palette.
+bold_color = ""
+
+[apps.fastfetch]
+# The word after the brand in Fastfetch's header line.
+header = "LOCAL"
+
+[apps.starship]
+# CSS-like style prefixes Starship accepts: "bold ", "italic ", or "".
+runtime_weight = "bold "
+symbol_weight = ""
+
+[apps.hermes]
+art_frame = "banner_accent"
+art_node = "prompt"
+# Hermes Desktop text selection (delivered through the skin's customCSS).
+selection_css = "selection_bg"
+
+[apps.obsidian]
+# The vault theme directory name (default "CORE - <ID>") and the accent.
+vault_theme = ""
+accent_color = "signal_emphasis"
+# Fine-grained choices: which CORE variable a few Obsidian surfaces use.
+blue = "structure"
+primary_alt_var = "--core-bg"
+accent_hover_var = "--core-signal"
+form_field_var = "--core-bg"
+tab_active_text_var = "--core-fg"
+nav_active_var = "--core-signal"
+nav_selected_var = "--core-fg-bright"
+scrollbar_active_var = "--core-border"
+scrollbar_hover_var = "--core-border"
+checkbox_marker_var = "--core-fg-bright"
+graph_focused_var = "--core-signal"
+graph_tag_var = "--core-command"
+graph_attachment_var = "--core-meta"
+unresolved_var = "--core-meta"
+status_hover_var = "--core-signal"
+# Appended to the highlight colour, e.g. "59" for ~35% alpha.
+highlight_alpha = ""
+caret = "accent_bright"
+note_callout = "muted"
+callout_bg = "canvas"
+inline_code = "code_text"
+
+[light.apps.obsidian]
+shadow = "text_emphasis"
+deep_shadows = ""
+
+[dark.apps.obsidian]
+shadow = "canvas"
+deep_shadows = "yes"
+
+[apps.chatgpt]
+# ChatGPT (Codex app) Settings → Appearance → Import. Colours must be #RRGGBB.
+surface = "background"
+ink = "text"
+accent = "signal"
+contrast = 60
+opaque_windows = false
+diff_added = "signal"
+diff_removed = "fault"
+skill = "command"
+# One of ChatGPT's built-in code themes; "codex" exists in light and dark.
+code_theme = "codex"
+# Font family names, or "" to keep ChatGPT's own fonts.
+font_ui = ""
+font_code = ""
+
+[apps.terminal]
+# macOS Terminal: render bold text with the bright ANSI colours.
+bright_bold = false
+
+[apps.macos]
+# "light", "dark", or "" to follow the theme's mode. Only used when the user
+# explicitly enables the macOS appearance surface.
+appearance = ""

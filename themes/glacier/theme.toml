@@ -1,0 +1,366 @@
+[theme]
+id = "glacier"
+name = "NODE // GLACIER"
+mode = "light"
+slug = "node-glacier"
+brand = "NODE"
+author = "Artyom Andreyev"
+description = "Cold synthetic chassis: clean white-silver material, deep blue signal with a clear blue emission, pale icy-blue backlighting, cool gray structure, a small amber command accent and restrained red faults."
+
+# ─────────────────────────────────────────────
+# PALETTE — what colours exist.
+# # Cold, precise, airy: white-silver hardware with an arctic blue emission.
+# Never generic corporate blue, never cyan everywhere.
+# ─────────────────────────────────────────────
+[palette]
+# The material axis. `black*` is the CHASSIS (what the app is made of — light
+# material here) and `white*` is INFORMATION drawn on it; the role names below
+# keep working across a light and a dark theme because they reference this axis,
+# never a hue.
+
+# Clean cool white / silver chassis.
+black = "#F3F5F8"
+black_alt = "#E3E7EC"
+
+# Pale icy-blue backlit / selected / raised material.
+black_raised = "#D2E5F6"
+
+black_line = "#AFBAC6"
+
+# Cool-to-neutral graphite information drawn on that material.
+white = "#1A1E24"
+white_bright = "#080A0D"
+
+# Cool structural gray.
+gray = "#666E78"
+gray_bright = "#3D444C"
+
+# Signal machinery: `blue` is dark enough to read as ink on the
+# light chassis, `blue_emphasis` is the brighter emitted blue —
+# still legible as text, `blue_dim` is the pale backlit panel.
+blue = "#1B4E86"
+blue_emphasis = "#1A66A3"
+blue_dim = "#D2E5F6"
+
+# Amber command accent: `amber` and `amber_emphasis` read as ink on
+# the light material, `amber_material` is the physical control material — a
+# filled control pairs it with a dark legend — and `amber_dim` is the pale
+# chip fill behind tags and highlights.
+amber = "#6B5400"
+amber_emphasis = "#866300"
+amber_material = "#EFC96C"
+amber_dim = "#EFDFAE"
+
+# Fault only.
+red = "#B02A21"
+red_emphasis = "#BD3328"
+
+# Icy-blue interaction / selection material.
+selection = "#BFDCF2"
+
+# ─────────────────────────────────────────────
+# ROLES — what those colours mean in this theme.
+# A role names MEANING (signal, command, structure, fault, text…), never a hue.
+# ─────────────────────────────────────────────
+[roles]
+background = "black"
+surface = "black_alt"
+surface_raised = "black_raised"
+border = "black_line"
+border_emphasis = "blue_dim"
+
+text = "white"
+text_emphasis = "white_bright"
+text_muted = "gray_bright"
+
+structure = "gray"
+structure_emphasis = "gray_bright"
+
+signal = "blue"
+signal_emphasis = "blue_emphasis"
+signal_dim = "blue_dim"
+
+command = "amber"
+command_emphasis = "amber_emphasis"
+
+# Filled controls. A physical control is a MATERIAL with a legend printed on it.
+# `command_material` is the fill, `command_legend` is what is drawn on it — so a
+# filled control never pairs its pale fill with light text.
+command_material = "amber_material"
+command_legend = "text_emphasis"
+
+fault = "red"
+fault_emphasis = "red_emphasis"
+
+selection = "selection"
+
+[terminal]
+foreground = "text"
+background = "background"
+cursor = "signal_emphasis"
+selection_background = "selection"
+selection_foreground = "text_emphasis"
+
+[terminal.ansi]
+# The ANSI ramp speaks in the roles' own vocabulary, so a terminal theme follows
+# a palette change without a template edit.
+black = "text_emphasis"
+red = "red_emphasis"
+green = "signal"
+yellow = "command"
+blue = "structure_emphasis"
+magenta = "gray_bright"
+cyan = "signal"
+white = "structure"
+
+bright_black = "gray"
+bright_red = "fault_emphasis"
+bright_green = "signal_emphasis"
+bright_yellow = "command_emphasis"
+bright_blue = "text_muted"
+bright_magenta = "structure_emphasis"
+bright_cyan = "signal_emphasis"
+bright_white = "text_emphasis"
+
+# ─────────────────────────────────────────────
+# PROMPT — approved Starship semantics.
+# NODE white / // gray / directory clear blue / branch white /
+# status amber / arrow blue / errors red.
+# ─────────────────────────────────────────────
+[prompt]
+frame = "structure"
+brand = "text_emphasis"
+separator = "structure"
+directory = "signal_emphasis"
+git_branch = "text_emphasis"
+git_status = "command_emphasis"
+runtime = "command_emphasis"
+environment = "signal_emphasis"
+success = "signal_emphasis"
+error = "fault_emphasis"
+vim_command = "command_emphasis"
+
+# ─────────────────────────────────────────────
+# APP MAPPINGS — application-specific assignments.
+# Application-specific KEYS live here, application-specific STRUCTURE lives in
+# the templates. A future theme changes these values without touching Python.
+#
+# Two invariants hold across every mapping below:
+#   · anything drawn as TEXT on light material is an INK (signal, command,
+#     fault, structure, text) — the pale fills and the bright control material
+#     are never used as text;
+#   · anything drawn as a FILL uses a MATERIAL (surface, surface_raised,
+#     selection, amber_material, amber_dim) and carries a dark legend.
+# ─────────────────────────────────────────────
+
+[apps.fastfetch]
+title = "text_emphasis"
+separator = "structure"
+label = "structure_emphasis"
+value = "text"
+healthy = "signal_emphasis"
+status = "command_emphasis"
+fault = "fault_emphasis"
+# Command-coloured ink: a small command/state control line and a state badge,
+# not a amber panel. Fastfetch keeps graphite values, gray
+# structure and readable blue state.
+rule = "command"
+badge = "command_emphasis"
+
+[apps.vscode]
+# Structure
+canvas = "background"
+surface = "surface"
+surface_raised = "surface_raised"
+border = "border"
+# A visible UI boundary, not an accent wash: gray stays legible at control size.
+border_emphasis = "structure"
+# Information
+body = "text"
+strong = "text_emphasis"
+metadata = "structure"
+metadata_emphasis = "structure_emphasis"
+comment = "structure"
+# Interaction
+cursor = "signal_emphasis"
+focus = "signal"
+accent = "signal"
+accent_strong = "signal_emphasis"
+selection = "selection"
+selection_foreground = "text_emphasis"
+selection_highlight = "signal_dim"
+# State
+modified = "command"
+warning = "command"
+error = "fault"
+error_strong = "fault_emphasis"
+success = "signal"
+# The control material with its graphite legend: a filled badge, never light
+# text on a pale fill.
+badge = "command_material"
+badge_text = "command_legend"
+# Syntax — every token is an ink that clears the normal-text threshold on the
+# canvas.
+keyword = "signal"
+function = "text_emphasis"
+string = "command"
+number = "command_emphasis"
+constant = "command_emphasis"
+type = "signal_emphasis"
+variable = "text"
+parameter = "text"
+operator = "text_muted"
+tag = "signal"
+attribute = "command"
+invalid = "fault_emphasis"
+
+# The CLI skin and the Desktop theme are the SAME artifact: the desktop
+# converts the active backend skin into a DesktopTheme
+# (apps/desktop/src/themes/skin.ts). Keys below marked (desktop) are read by
+# that converter; the rest are the CLI contract.
+[apps.hermes]
+background = "background"        # (desktop) GUI canvas opt-in
+status_bar_bg = "surface"        # (desktop) backdrop fallback
+ui_text = "text"                 # (desktop) foreground seed
+banner_text = "text_emphasis"    # (desktop) foreground seed
+ui_accent = "signal_emphasis"    # (desktop) accent / midground / focus / selection accent
+banner_accent = "signal"
+ui_border = "border"             # (desktop) hairlines
+banner_border = "border"
+banner_title = "text_emphasis"
+banner_dim = "text_muted"        # (desktop) muted foreground / CLI dim
+ui_label = "structure_emphasis"
+ui_ok = "signal"
+ui_error = "fault"               # (desktop) destructive
+ui_warn = "command"
+session_border = "signal"
+session_label = "command"
+
+prompt = "text_emphasis"
+input_rule = "signal"
+response_border = "signal"
+
+# Both are drawn as text over the canvas fill, so both are inks.
+status_bar_text = "text"
+status_bar_strong = "text_emphasis"
+status_bar_dim = "text_muted"
+status_bar_good = "signal"
+status_bar_warn = "command"
+status_bar_bad = "fault"
+status_bar_critical = "fault_emphasis"
+
+completion_menu_bg = "surface"            # (desktop) input fill
+completion_menu_current_bg = "signal_dim"
+completion_menu_meta_bg = "surface"
+completion_menu_meta_current_bg = "signal_dim"
+selection_bg = "selection"
+
+shell_dollar = "command"
+voice_status_bg = "surface"
+
+[apps.obsidian]
+# Structure
+canvas = "background"
+surface = "surface"
+surface_2 = "surface"
+surface_3 = "surface_raised"
+border = "border"
+border_bright = "signal"
+# Information
+body = "text"
+strong = "text_emphasis"
+muted = "text_muted"
+dim = "structure"
+# Interaction
+accent = "signal"
+accent_bright = "signal_emphasis"
+accent_dim = "signal_dim"
+hover = "surface_raised"
+active = "selection"
+selection = "selection"
+selection_foreground = "text_emphasis"
+# Semantic state
+success = "signal"
+success_bright = "signal_emphasis"
+warning = "command"
+warning_bright = "command_emphasis"
+error = "fault"
+error_bright = "fault_emphasis"
+highlight = "text_emphasis"
+highlight_bg = "amber_dim"
+# Code — the pale backlit panel with ink drawn inside it.
+code_bg = "signal_dim"
+code_text = "text_emphasis"
+code_keyword = "signal"
+code_string = "command"
+code_number = "command"
+code_function = "text_emphasis"
+code_comment = "structure_emphasis"
+# Headings: a graphite / blue hierarchy, not a rainbow.
+heading_1 = "text_emphasis"
+heading_2 = "text"
+heading_3 = "signal"
+heading_4 = "text_emphasis"
+heading_5 = "structure_emphasis"
+heading_6 = "structure"
+# Tags / navigation. A tag chip is a MATERIAL with a dark legend, so the chip
+# never carries light text.
+tag_bg = "amber_dim"
+tag_text = "text_emphasis"
+link = "signal"
+link_bright = "signal_emphasis"
+scrollbar = "surface_raised"
+checkbox = "command_material"
+# Small command-coloured metadata markers rather than command-coloured
+# metadata text.
+heading_ornament = "command"
+metadata_icon = "command"
+metadata_add = "command"
+
+# ─────────────────────────────────────────────
+# OBSIDIAN — code tokens and application chrome.
+#
+# Obsidian's own stylesheet (verified against Obsidian 1.13.7 app.css) colours
+# every fenced-code token from a `--code-*` variable and nothing else:
+#   .cm-keyword  -> var(--code-keyword)     .cm-string   -> var(--code-string)
+#   .cm-number   -> var(--code-value)       .cm-builtin,
+#   .cm-comment  -> var(--code-comment)     .cm-property,
+#   .cm-punctuation, .cm-bracket,           .cm-attribute,
+#   .cm-hr       -> var(--code-punctuation) .cm-type     -> var(--code-function)
+#   .token.keyword / .token.string / .token.number … for the reading view.
+# Every token that is drawn inside the pale backlit blue code
+# panel is therefore dark: graphite code, readable dark blue ink
+# keywords, readable dark amber literals, structural gray
+# comments, restrained red faults. The emitted clear blue and the
+# bright control material are never used as code text.
+code_property = "text_emphasis"
+code_punctuation = "text"
+code_operator = "text_muted"
+code_tag = "signal"
+code_important = "command"
+code_invalid = "fault"
+code_border = "border"
+code_bracket_bg = "selection"
+
+# Obsidian application chrome. `chrome` is the chassis the shell is built from
+# (titlebar, tab strip, ribbon, status bar, sidebar chrome); `chrome_alt` is the
+# deeper active/content surface (active tab, panes, modals, palettes, fields);
+# `chrome_active` is a selected structural surface — the pale backlit
+# blue. Icons are structural gray at rest and readable ink when
+# active.
+chrome = "surface"
+chrome_alt = "background"
+chrome_active = "selection"
+icon = "text_muted"
+icon_hover = "signal"
+icon_active = "signal"
+
+# Filled/selected controls: the pale backlit blue fill with a
+# graphite legend. This pair is the contrast contract — `control_fill` is never
+# paired with light text, because the fill is light material.
+control_fill = "selection"
+control_legend = "text_emphasis"
+
+[apps.ghostty]
+# Bold text uses the bright ANSI palette.
+bold_color = "bright"

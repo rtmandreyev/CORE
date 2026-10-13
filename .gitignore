@@ -1,0 +1,31 @@
+# CORE repository hygiene.
+#
+# Generated theme assets are NOT committed: the compiler is deterministic, so
+# `core build <theme>` recreates the whole tree from theme.toml + templates/.
+# Committing them would only invite source/generated drift.
+themes/*/generated/
+
+# Build output (`core build`, and the compile every apply/preview performs).
+build/
+
+# CORE's own state (preview receipts, integration receipts) lives outside the
+# repository — corelib/paths.py puts it under the user's config directory. These
+# are belt-and-braces guards in case a local run ever writes inside the tree.
+transaction.json
+state.json
+
+# OS / editor / Python noise.
+.DS_Store
+.Rhistory
+*.pyc
+__pycache__/
+.env
+.env.*
+*.orig
+*.rej
+.pytest_cache/
+
+# Local Obsidian test-vault state (this directory is intentionally a vault on
+# one developer's machine). The vault's notes and metadata are never part of the
+# project; `docs/` itself stays tracked.
+docs/.obsidian/

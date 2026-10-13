@@ -1,0 +1,459 @@
+[theme]
+id = "optical"
+name = "NODE // OPTICAL"
+mode = "dark"
+slug = "node-optical"
+brand = "NODE"
+author = "Artyom Andreyev"
+description = "Dark optical / cybernetic interface: a cold blue-black chassis, ice information drawn on it, emitted cyan signal, amber command, phosphor green success and a restrained red fault. The nighttime profile."
+
+# ─────────────────────────────────────────────
+# PALETTE — what colours exist.
+#
+# This is a colour-preserving transcription of the hand-authored OPTICAL assets
+# (themes/optical/<surface>/**, which stay in place as the comparison baseline),
+# arranged on the same two axes SHELL uses:
+#
+#   `black*` is the MATERIAL axis — the chassis the interface is made of. Here
+#   that chassis is the cold blue-black nighttime polymer, deepest at `black`
+#   (the canvas) and lifting through `black_alt`, `black_raised`, `black_selected`
+#   as a surface is raised, hovered or selected.
+#
+#   `white*` is the INFORMATION axis — what is drawn on the chassis. Here that
+#   is ice: `white` is primary information and `white_bright` the emphasised /
+#   heading / legend ice.
+#
+# Roles below reference the axis, never a hue, which is what lets the same
+# compiler and the same templates emit this dark theme and SHELL's light one.
+# ─────────────────────────────────────────────
+[palette]
+# ── the material axis: the cold blue-black chassis ──
+
+# The canvas — the deepest chassis: editor, reading view, terminal background.
+black = "#020A12"
+# Below the chassis: the Hermes status bar / voice bar backdrop.
+black_deep = "#02070D"
+# The raised chassis surface: sidebars, ribbon, tab strip, status bar, tables,
+# embeds and the fenced-code panel.
+black_alt = "#031018"
+# A commissioned panel fill: the Hermes completion menu.
+black_panel = "#030B12"
+# Raised above the chassis: menus, modals, prompts, suggestions, tooltips.
+black_raised = "#071722"
+# A selected / active structural surface.
+black_selected = "#0B2A38"
+# The hover wash laid over the chassis.
+black_hover = "#071C27"
+# A tag chip's fill.
+black_tag = "#07232D"
+# Structural hairlines.
+black_line = "#12303C"
+black_line_bright = "#1B5266"
+# A soft border used where a full hairline would be too loud (Hermes sessions).
+black_line_soft = "#17384A"
+
+# ── the information axis: ice drawn on the chassis ──
+
+# Primary information.
+white = "#B9E7F2"
+# Emphasised information: headings, strong text, filled-control legends.
+white_bright = "#DDF9FF"
+# The coldest ice, used by the terminal's selection legend.
+white_ice = "#E4FBFF"
+# Structural slate: comments, dim text, inactive chrome.
+gray = "#6F929D"
+# Muted slate: secondary text, secondary chrome.
+gray_bright = "#A8CDD6"
+
+# ── signal: the emitted cyan ──
+
+cyan = "#00CFE8"
+cyan_bright = "#4DEAFF"
+# The dim signal: the petroleum interaction/selection surface.
+cyan_dim = "#0B3A4A"
+
+# ── command: the amber keycap ──
+
+amber = "#D6B85C"
+amber_bright = "#E7CB70"
+
+# ── fault only ──
+
+red = "#FF536B"
+red_bright = "#FF6B7D"
+
+# ── phosphor green: success, tags, graph tag nodes ──
+
+green = "#43D9A3"
+green_bright = "#62E6B5"
+# Dimmed phosphor, used where a status glyph must not shout.
+green_dim = "#57C9B0"
+
+# ── blue: unresolved links, attachments ──
+
+blue = "#258CFF"
+blue_bright = "#52A8FF"
+
+# ── violet: the terminal's fifth hue ──
+
+violet = "#7777D9"
+violet_bright = "#9292EA"
+
+# ── steel: the terminal's structural grey (ANSI 8) ──
+
+steel = "#38515C"
+
+# ── interaction ──
+
+# The petroleum selection surface.
+selection = "#0B3A4A"
+# The editor / terminal cursor. Decorative in the sense that only a caret reads
+# it, but kept as a palette entry so the generated cursor stays exactly this.
+cursor = "#00E5FF"
+# A muted ice used by the Hermes banner frame and session labels.
+ice_muted = "#83C7E8"
+
+# ─────────────────────────────────────────────
+# ROLES — what those colours mean in this theme.
+# ─────────────────────────────────────────────
+[roles]
+background = "black"
+surface = "black_alt"
+surface_raised = "black_raised"
+border = "black_line"
+border_emphasis = "black_line_bright"
+
+text = "white"
+text_emphasis = "white_bright"
+text_muted = "gray_bright"
+
+structure = "gray"
+structure_emphasis = "gray_bright"
+
+signal = "cyan"
+signal_emphasis = "cyan_bright"
+signal_dim = "cyan_dim"
+
+command = "amber"
+command_emphasis = "amber_bright"
+
+# Filled controls. OPTICAL has no yellow keycap: its filled control is the
+# EMITTED CYAN material, and the legend printed on it is the deep chassis —
+# the same material+legend contract SHELL keeps, read the other way round
+# (its fill is pale and its legend graphite; here the fill is bright and the
+# legend is the dark canvas). Never light text on the bright cyan.
+command_material = "cyan"
+command_legend = "background"
+
+fault = "red"
+fault_emphasis = "red_bright"
+
+success = "green"
+success_emphasis = "green_bright"
+
+selection = "selection"
+
+[terminal]
+foreground = "text"
+background = "background"
+cursor = "cursor"
+selection_background = "selection"
+selection_foreground = "white_ice"
+
+# The 16 ANSI slots reproduce ghostty/node-optical exactly; the Starship
+# template draws on the same names.
+[terminal.ansi]
+black = "surface"
+red = "fault"
+green = "green"
+yellow = "command"
+blue = "blue"
+magenta = "violet"
+cyan = "signal"
+white = "text_muted"
+
+bright_black = "steel"
+bright_red = "fault_emphasis"
+bright_green = "green_bright"
+bright_yellow = "amber_bright"
+bright_blue = "blue_bright"
+bright_magenta = "violet_bright"
+bright_cyan = "signal_emphasis"
+bright_white = "text_emphasis"
+
+# ─────────────────────────────────────────────
+# PROMPT — the approved Starship semantics, transcribed from OPTICAL's
+# hand-authored prompt: steel frame, cyan directory, blue branch, violet
+# status, cyan success/vim, red error.
+# ─────────────────────────────────────────────
+[prompt]
+frame = "steel"
+brand = "signal"
+separator = "steel"
+directory = "signal"
+git_branch = "blue"
+git_status = "violet"
+runtime = "blue"
+environment = "signal"
+success = "signal"
+error = "fault"
+vim_command = "signal"
+
+# ─────────────────────────────────────────────
+# APP MAPPINGS — application-specific assignments.
+# Application-specific KEYS live here, application-specific STRUCTURE lives in
+# the templates. The values below are OPTICAL's own; they are what keeps the
+# compiled output colour-identical to the hand-authored trees.
+# ─────────────────────────────────────────────
+
+[apps.fastfetch]
+title = "text_emphasis"
+separator = "structure"
+# The hand-authored config coloured the keys "blue"; `blue` is that same ANSI
+# slot, now written as the palette's hex.
+label = "blue"
+value = "text"
+healthy = "green"
+status = "command_emphasis"
+fault = "fault_emphasis"
+rule = "signal"
+badge = "command_emphasis"
+
+[apps.vscode]
+# Structure
+canvas = "background"
+surface = "surface"
+surface_raised = "surface_raised"
+border = "border"
+border_emphasis = "border_emphasis"
+# Information
+body = "text"
+strong = "text_emphasis"
+metadata = "structure"
+metadata_emphasis = "structure_emphasis"
+comment = "structure"
+# Interaction
+cursor = "cursor"
+focus = "signal"
+accent = "signal"
+accent_strong = "signal_emphasis"
+selection = "selection"
+selection_foreground = "text_emphasis"
+selection_highlight = "signal_dim"
+# State
+modified = "command"
+warning = "command_emphasis"
+error = "fault"
+error_strong = "fault_emphasis"
+success = "green"
+# A filled badge is the cyan material with the deep chassis as its legend.
+badge = "command_material"
+badge_text = "command_legend"
+# Syntax
+keyword = "signal"
+function = "text_emphasis"
+string = "command"
+number = "command_emphasis"
+constant = "command_emphasis"
+type = "signal_emphasis"
+variable = "text"
+parameter = "text"
+operator = "text_muted"
+tag = "signal"
+attribute = "command"
+invalid = "fault_emphasis"
+
+# The CLI skin and the Desktop theme are the SAME artifact: the desktop
+# converts the active backend skin into a DesktopTheme
+# (apps/desktop/src/themes/skin.ts). Every value below is the hand-authored
+# themes/optical/hermes/node-optical.yaml value, so the skin does not move.
+[apps.hermes]
+background = "background"        # (desktop) GUI canvas opt-in
+status_bar_bg = "black_deep"     # (desktop) backdrop fallback
+ui_text = "text"                 # (desktop) foreground seed
+banner_text = "text_emphasis"    # (desktop) foreground seed
+ui_accent = "signal_emphasis"    # (desktop) accent / midground / focus
+banner_accent = "signal"
+ui_border = "border"             # (desktop) hairlines
+banner_border = "border"
+banner_title = "text"
+# Hermes applies Rich's extra `dim` modifier to these two, so OPTICAL keeps the
+# deliberately bright ice source exactly as the hand-authored skin does.
+banner_dim = "text"
+ui_label = "ice_muted"
+ui_ok = "green_dim"
+ui_error = "fault"               # (desktop) destructive
+ui_warn = "command"
+session_border = "black_line_soft"
+session_label = "ice_muted"
+
+prompt = "text_emphasis"
+input_rule = "border"
+response_border = "signal"
+
+status_bar_text = "text"
+status_bar_strong = "text_emphasis"
+status_bar_dim = "text"
+status_bar_good = "green_dim"
+status_bar_warn = "command"
+status_bar_bad = "fault"
+status_bar_critical = "fault"
+
+completion_menu_bg = "black_panel"
+completion_menu_current_bg = "black_selected"
+completion_menu_meta_bg = "black_panel"
+completion_menu_meta_current_bg = "black_selected"
+selection_bg = "selection"
+
+shell_dollar = "signal_emphasis"
+art_frame = "ui_accent"
+art_node = "banner_accent"
+voice_status_bg = "black_deep"
+
+[apps.obsidian]
+# Structure
+canvas = "background"
+surface = "surface"
+surface_2 = "black_raised"
+surface_3 = "black_selected"
+border = "border"
+border_bright = "border_emphasis"
+# Information
+body = "text"
+strong = "text_emphasis"
+muted = "text_muted"
+dim = "structure"
+# Interaction
+accent = "signal"
+accent_bright = "signal_emphasis"
+# The caret keeps OPTICAL's own cursor cyan, which is a distinct colour from
+# the emitted signal in the hand-authored theme (the inline code chip, a code
+# surface, follows the code rules and prints the bright emitted cyan instead).
+cursor = "cursor"
+# `accent_dim` feeds --core-control-fill-hover, which the hand-authored theme
+# renders with the bright cyan (it hovers UP, as a dark theme must).
+accent_dim = "signal_emphasis"
+hover = "black_hover"
+active = "black_selected"
+selection = "selection"
+selection_foreground = "text_emphasis"
+# Semantic state
+# The hand-authored stylesheet painted unresolved links, graph attachment nodes
+# and the note callout in the palette's info-blue. The compiled variable layer
+# is derived from a daytime theme that has no such slot, so OPTICAL declares one
+# rather than dropping the colour.
+blue = "blue"
+success = "green"
+# The "bright" success slot carries the same phosphor so the success callout
+# keeps the hand-authored colour exactly (OPTICAL has one success green).
+success_bright = "green"
+warning = "command"
+warning_bright = "command_emphasis"
+error = "fault"
+error_bright = "fault_emphasis"
+highlight = "text_emphasis"
+# The hand-authored highlight is the amber at 35% alpha; the template composes
+# the alpha, so the palette entry stays the plain colour.
+highlight_bg = "command"
+# Code: the panel is the raised chassis, the ink is ice.
+code_bg = "surface"
+code_text = "text"
+code_keyword = "signal"
+code_string = "command"
+code_number = "command_emphasis"
+code_function = "text_emphasis"
+code_comment = "structure"
+# Headings: an ice/cyan hierarchy, not a rainbow — as hand-authored.
+heading_1 = "text_emphasis"
+heading_2 = "signal_emphasis"
+heading_3 = "signal"
+heading_4 = "text_emphasis"
+heading_5 = "text_muted"
+heading_6 = "structure"
+# Tags / navigation: a dark cyan chip with cyan text.
+tag_bg = "black_tag"
+tag_text = "signal"
+link = "signal"
+link_bright = "signal_emphasis"
+scrollbar = "border"
+checkbox = "signal"
+# OPTICAL has no yellow ornament/markers: headings gain a structural hairline
+# and metadata markers stay slate, as the hand-authored theme had them.
+heading_ornament = "border_emphasis"
+metadata_icon = "structure"
+metadata_add = "text_muted"
+
+# ─────────────────────────────────────────────
+# OBSIDIAN — code tokens and application chrome.
+#
+# Obsidian colours every fenced-code token from a `--code-*` variable and
+# nothing else (.cm-keyword -> var(--code-keyword), .cm-number ->
+# var(--code-value), .token.* for the reading view). The hand-authored OPTICAL
+# stylesheet set only --code-normal and --code-background, so every other token
+# fell through to Obsidian's stock pink/yellow/cyan/purple ramp. These are the
+# tokens that close that gap, drawn from OPTICAL's own palette: ice code, cyan
+# keywords, amber literals, slate comments, green tags, violet important, red
+# faults. Every one of them clears 4.5:1 on the #031018 panel.
+code_property = "text"
+code_punctuation = "text_muted"
+code_operator = "structure"
+code_tag = "green"
+code_important = "violet"
+code_invalid = "fault"
+code_border = "border"
+code_bracket_bg = "selection"
+
+# Obsidian application chrome. `chrome` is the chassis the shell is built from
+# (titlebar, tab strip, ribbon, status bar); `chrome_alt` is the canvas the
+# active tab and content panes sit on (OPTICAL lifts the ACTIVE pane out of the
+# chassis by darkening it, the mirror of SHELL lighting it); `chrome_active` is
+# a selected structural surface. Icons are slate at rest and bright cyan when
+# hovered or active.
+chrome = "surface"
+chrome_alt = "background"
+chrome_active = "black_selected"
+icon = "text_muted"
+icon_hover = "signal_emphasis"
+icon_active = "signal_emphasis"
+
+# Filled/selected controls: the emitted cyan material with the deep chassis as
+# its legend. This pair is the contrast contract — `control_fill` is never
+# paired with ice text, because the fill is a bright material.
+control_fill = "signal"
+control_legend = "background"
+
+# OPTICAL lifts the chassis, brightens active navigation and keeps the
+# hand-authored soft black shadows; these override CORE's shared defaults.
+accent_color = "signal"
+primary_alt_var = "--core-chrome"
+form_field_var = "--core-chrome"
+accent_hover_var = "--core-signal-bright"
+tab_active_text_var = "--core-fg-bright"
+nav_active_var = "--core-signal-bright"
+nav_selected_var = "--core-signal-bright"
+scrollbar_active_var = "--core-border-bright"
+scrollbar_hover_var = "--core-border-bright"
+checkbox_marker_var = "--core-control-legend"
+graph_focused_var = "--core-signal-bright"
+graph_tag_var = "--core-success"
+graph_attachment_var = "--core-blue"
+unresolved_var = "--core-blue"
+status_hover_var = "--core-signal-bright"
+highlight_alpha = "59"
+caret = "cursor"
+note_callout = "blue"
+callout_bg = "surface"
+inline_code = "accent_bright"
+shadow = "#000000"
+deep_shadows = ""
+
+# ─────────────────────────────────────────────
+# Options that keep OPTICAL's hand-authored look under the shared templates.
+# Every key here overrides a CORE default (corelib/templates/defaults.toml).
+# ─────────────────────────────────────────────
+[apps.starship]
+runtime_weight = ""
+symbol_weight = "bold "
+
+[apps.chatgpt]
+diff_added = "success"
