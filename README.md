@@ -3,6 +3,11 @@
 **Universal visual themes for macOS.** Define a theme once, then preview or apply
 it across your terminal, editor, AI tools and notes.
 
+<p align="center">
+  <a href="docs/media/core-preview.mp4"><img src="docs/media/core-preview.gif" width="100%" alt="The CORE app in Ghostty previews the SHELL theme: Ghostty, Obsidian and VS Code switch from dark OPTICAL to light SHELL together, then Enter restores OPTICAL everywhere."></a>
+</p>
+<p align="center"><sub><code>core</code> → Preview SHELL → every app switches → Enter → everything is back to OPTICAL. <a href="docs/media/core-preview.mp4">MP4</a></sub></p>
+
 ```
 themes/optical/theme.toml  ──►  core apply optical  ──►  Ghostty · Terminal · Starship · Fastfetch
    one file per theme                                     VS Code · Hermes · Obsidian
@@ -15,7 +20,16 @@ themes/optical/theme.toml  ──►  core apply optical  ──►  Ghostty · 
 - **Repairable.** When an app update removes CORE's files, `core repair` restores them.
 - **Partial setups are normal.** Only Ghostty and VS Code? CORE themes those two. Apps you don't have are skipped.
 
-<!-- Screenshots: see docs/media/README.md for the capture plan. -->
+<table>
+  <tr>
+    <td width="50%"><img src="docs/media/optical.png" alt="OPTICAL, a dark theme, across the CORE app in Ghostty, an Obsidian note and a VS Code file."></td>
+    <td width="50%"><img src="docs/media/shell.png" alt="The same windows under SHELL, a light theme."></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>OPTICAL</sub></td>
+    <td align="center"><sub>SHELL</sub></td>
+  </tr>
+</table>
 
 ## Supported applications
 
@@ -45,13 +59,15 @@ Each of these was verified against the real application on macOS, not only again
 | `augment` | dark | charcoal and black glass, restrained gold |
 | `neon` | dark | charcoal, electric cyan, vivid yellow |
 
+![The same TypeScript file in VS Code under each built-in theme: OPTICAL, SHELL, EMBER, GLACIER, AUGMENT and NEON.](docs/media/themes.png)
+
 ## Install
 
 You need macOS and Python 3.11 or newer. macOS ships Python 3.9; if you need a
 newer one, `brew install python@3.12` (or any other installer) works.
 
 ```sh
-git clone https://github.com/rtmandreyev/core.git ~/core
+git clone https://github.com/rtmandreyev/CORE.git ~/core
 ~/core/install.sh        # links ~/.local/bin/core; tells you if PATH needs a line
 core doctor              # read-only: what CORE sees on this Mac
 ```
@@ -75,30 +91,7 @@ core status              # what is active where
 
 Run `core` with no arguments:
 
-```
-  CORE                                                                 0.1.0
-  ──────────────────────────────────────────────────────────────────────────
-
-  Active theme
-    ● OPTICAL      dark
-
-  Themes
-  › 1  ◆ OPTICAL      dark
-    2    SHELL        light
-    3    EMBER        light
-    4    GLACIER      light
-    5    AUGMENT      dark
-    6    NEON         dark
-
-  Actions   for OPTICAL
-       Apply
-       Preview
-       Doctor
-       Repair
-       New theme
-       Help
-       Quit
-```
+<img src="docs/media/core-app.png" width="640" alt="The interactive CORE app in Ghostty: OPTICAL active, the six built-in themes, and the Apply, Preview, Doctor, Repair, New theme, Help and Quit actions.">
 
 - Pick a theme with `1`–`9` or the arrow keys and Enter.
 - **Apply** and **Preview** ask whether to use *All available applications* or

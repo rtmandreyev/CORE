@@ -1,27 +1,32 @@
 # Screenshots and demo
 
-This folder will hold the README's screenshots and the short demo video. None are
-committed yet; they must be real captures, made with demo content only.
+The README's images and demo video. Each is a capture of the real applications
+on a Mac, themed by CORE, with demo content only.
 
-## Rules
+| File | What it shows |
+| --- | --- |
+| `core-preview.mp4` | The hero demo (22 s, 1920×1080): the CORE app previews SHELL, Ghostty, Obsidian and VS Code switch together, Enter restores OPTICAL. |
+| `core-preview.gif` | The same demo for the README (1280 px, 15 fps). |
+| `core-app.png` | The interactive app (`core`) in Ghostty with OPTICAL active. |
+| `optical.png`, `shell.png` | The same three windows under OPTICAL and under SHELL. |
+| `themes.png` | One VS Code file under each of the six built-in themes. |
 
-- Use a demo vault, a demo Hermes session and a demo source file. No private
-  conversations, notes, file names or paths in any frame.
-- Capture app windows, not the whole screen (`screencapture -o -l <window-id>`,
-  or ⇧⌘4 then Space).
-- Keep the same window sizes and the same demo content across themes so the
-  images compare cleanly.
+## How they were made
 
-## Shot list
+- Content is synthetic: a throwaway Obsidian vault with one note, a short
+  TypeScript file in an otherwise empty folder, and the CORE app itself.
+- Each window was captured on its own with ScreenCaptureKit, so nothing else on
+  the screen could appear, then placed on a plain backdrop. The layout is a
+  composition; the colours and every change in the video are CORE's.
+- macOS draws a "being captured" badge over a window's traffic lights while it
+  is recorded; the video shows the window's real traffic lights instead, taken
+  from a still of the same window in the same theme.
+- CORE ran with `HOME` pointing at a neutral alias of the home folder, so the
+  paths it prints carry no user name. Nothing else about the run was changed.
 
-1. `app-home.png`: the interactive app (`core`) with OPTICAL active, in a terminal.
-2. `optical-*.png`: OPTICAL in Ghostty or Terminal (with Starship and Fastfetch
-   visible), VS Code (a short source file), Hermes Desktop (a demo chat with a
-   text selection), Obsidian (a demo note with tags, a callout and a code
-   block), and optionally ChatGPT after importing the OPTICAL string.
-3. `shell-*.png`: the same five windows under SHELL.
-4. `themes.png`: a grid of the six built-ins in one app (Ghostty or Obsidian).
-5. `preview.mp4` (15–25 s): start in OPTICAL, run `core preview shell`, show the
-   apps switch, press Enter, show them return to OPTICAL.
+## Rules for new captures
 
-When the files exist, reference them from the README's opening section.
+- Demo content only: no private conversations, notes, file names, paths,
+  accounts or notifications in any frame.
+- Capture app windows, not the whole screen.
+- Keep the same windows and content across themes so the images compare cleanly.

@@ -6,7 +6,7 @@ this file is short on purpose.
 ## Setup
 
 ```sh
-git clone https://github.com/rtmandreyev/core.git ~/core
+git clone https://github.com/rtmandreyev/CORE.git ~/core
 ~/core/install.sh
 core doctor
 ```
